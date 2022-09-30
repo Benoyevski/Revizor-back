@@ -11,8 +11,10 @@ module.exports.diner = {
       type: req.body.type,
       middlePrice: req.body.middlePrice,
       menu: req.body.menu,
-      position: req.body.position,
+      address: req.body.address,
       info: req.body.info,
+      image:req.body.image
+      
     });
     res.json(data);
   },

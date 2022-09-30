@@ -5,7 +5,7 @@ const dinerSchema = mongoose.Schema({
   type: String,
   middlePrice: Number,
   menu: String,
-  position: String,
+  address: String,
   raiting: [{
     grade: Number,
     userId: mongoose.Schema.Types.ObjectId,
