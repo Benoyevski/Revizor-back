@@ -10,6 +10,7 @@ const dinerSchema = mongoose.Schema({
     grade: Number,
     userId: mongoose.Schema.Types.ObjectId,
   }],
+  image: String,
   photo: [String],
   info: String,
 
