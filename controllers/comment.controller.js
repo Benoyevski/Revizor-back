@@ -7,7 +7,7 @@ module.exports.comment = {
   },
   addComment: async (req, res) => {
     const data = await Comment.create({
-      category: req.body.category,
+      text:req.body.text
     });
     res.json(data);
   },

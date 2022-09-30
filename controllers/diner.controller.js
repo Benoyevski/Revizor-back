@@ -7,7 +7,12 @@ module.exports.diner = {
   },
   addDiner: async (req, res) => {
     const data = await Diner.create({
-      category: req.body.category,
+      name: req.body.name,
+      type: req.body.type,
+      middlePrice: req.body.middlePrice,
+      menu: req.body.menu,
+      position: req.body.position,
+      info: req.body.info,
     });
     res.json(data);
   },
