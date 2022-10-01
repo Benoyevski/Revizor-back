@@ -13,7 +13,8 @@ module.exports.diner = {
       menu: req.body.menu,
       address: req.body.address,
       info: req.body.info,
-      image:req.body.image
+      image:req.body.image,
+      photo:req.body.photo,
       
     });
     res.json(data);
