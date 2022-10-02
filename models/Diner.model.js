@@ -6,12 +6,11 @@ const dinerSchema = mongoose.Schema({
   middlePrice: Number,
   menu: [String],
   address: String,
-  raiting: [
-    {
-      grade: Number,
-      userId: mongoose.Schema.Types.ObjectId,
-    },
-  ],
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  ratedUsers: [{ user: mongoose.SchemaTypes.ObjectId, rating: Number }],
   image: String,
   photo: [String],
   info: String,
