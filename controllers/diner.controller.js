@@ -31,26 +31,20 @@ module.exports.diner = {
   },
   rateDiner: async (req, res) => {
     const { dinerId, rating } = req.body;
-    console.log(rating);
     const { id } = req.user;
-
     try {
       const diner = await Diner.findById(dinerId);
-      let find = diner.ratedUsers.find((item) => String(item.user) === id);
-      if (!find) {
-        await diner.updateOne({
-          $push: { ratedUsers: { user: id, rating } },
-        });
+      if (!diner.ratedUsers.find((item) => String(item.user) === id)) {
+        diner.ratedUsers.push({ user: id, rating });
+        await diner.save();
         if (diner.rating !== 0) {
           const sum = diner.ratedUsers.reduce((acc, element) => {
             return acc + Number(element.rating);
           }, 0);
           await diner.updateOne({
-            rating: (
-              (sum + Number(rating)) /
-              (diner.ratedUsers.length + 1)
-            ).toFixed(1),
+            rating: (sum / diner.ratedUsers.length).toFixed(1),
           });
+          await diner.save()
         } else {
           await diner.updateOne({
             rating: rating,

@@ -7,6 +7,6 @@ router.get("/diner", diner.getDiner);
 router.post("/diner", diner.addDiner);
 router.patch("/diner/:id", diner.updateDiner);
 router.delete("/diner/:id", diner.deleteDiner);
-router.patch("/diner/rating", middleware, diner.rateDiner);
+router.patch("/rating", middleware, diner.rateDiner);
 
 module.exports = router;
