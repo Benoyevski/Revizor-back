@@ -8,5 +8,5 @@ router.post("/diner", diner.addDiner);
 router.patch("/diner/:id", diner.updateDiner);
 router.delete("/diner/:id", diner.deleteDiner);
 router.patch("/rating", middleware, diner.rateDiner);
-
 module.exports = router;
+

@@ -21,7 +21,7 @@ module.exports.diner = {
   updateDiner: async (req, res) => {
     const data = await Diner.findByIdAndUpdate(
       req.params.id,
-      req.body.category
+      photo.req.body.photo
     );
     res.json(data);
   },
@@ -44,7 +44,7 @@ module.exports.diner = {
           await diner.updateOne({
             rating: (sum / diner.ratedUsers.length).toFixed(1),
           });
-          await diner.save()
+          await diner.save();
         } else {
           await diner.updateOne({
             rating: rating,
