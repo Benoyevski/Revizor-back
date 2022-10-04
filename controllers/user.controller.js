@@ -10,31 +10,35 @@ module.exports.user = {
   },
 
   login: async (req, res) => {
-    const { login, password } = req.body;
-    const candidate = await User.findOne({ login });
-    if (!candidate) {
-      return res.status(401).json("User not find");
-    }
+    try {
+      const { login, password, mail } = req.body;
+      const candidate = await User.findOne({ mail, login });
 
-    const valid = await bcrypt.compare(password, candidate.password);
-    if (!valid) {
-      return res.status(401).json("password wrong");
-    }
-    const payload = {
-      id: candidate._id,
-    };
-    const token = await jwt.sign(payload, process.env.SECRET_JWT, {
-      expiresIn: "95h",
-    });
-    res.json({
-      token,
-      id: candidate._id,
-    });
+      if (!candidate) {
+        return res.status(401).json("User not find");
+      }
+
+      const valid = await bcrypt.compare(password, candidate.password);
+
+      if (!valid) {
+        return res.status(401).json("password wrong");
+      }
+      const payload = {
+        id: candidate._id,
+      };
+      const token = await jwt.sign(payload, process.env.SECRET_JWT, {
+        expiresIn: "95h",
+      });
+      res.json({
+        token,
+        id: candidate._id,
+      });
+    } catch (error) {res.json({error:e})}
   },
 
   registr: async (req, res) => {
     try {
-      const { login, password } = req.body;
+      const { login, password, mail } = req.body;
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
