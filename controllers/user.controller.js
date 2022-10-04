@@ -1,6 +1,7 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require('fs')
 
 module.exports.user = {
   getUsers: async (req, res) => {
@@ -51,6 +52,23 @@ module.exports.user = {
       res.json(user);
     } catch (e) {
       res.json({ error: e });
+    }
+  },
+  addAvatar: async (req, res) => {
+    try {
+      const file = req.files.file;
+      let path = `public\\avatar\\${file.name}`;
+      const user = await User.findByIdAndUpdate(req.params.id, {
+        avatar: file.name,
+      });
+    
+      if (fs.existsSync(path)) {
+        return res.status(400).json("File already exist");
+      }
+      file.mv(path);
+      res.json(user);
+    } catch (e) {
+      res.json(e);
     }
   },
 };

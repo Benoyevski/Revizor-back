@@ -4,6 +4,7 @@ const userSchema = mongoose.Schema({
   login: String,
   password: String,
   mail: String,
+  avatar: String,
   comment: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Comment",
