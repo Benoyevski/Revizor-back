@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
   login: String,
   password: String,
-  email: String,
+  mail: String,
+  avatar: String,
   comment: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Comment",
