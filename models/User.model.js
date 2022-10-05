@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   like: [{ 
     type: mongoose.Schema.Types.ObjectId,
     ref: "Diner" }],
-  avatar: { type: String, default: "" },
+  avatar: String,
   comment: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Comment",
