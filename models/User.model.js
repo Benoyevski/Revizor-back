@@ -4,7 +4,10 @@ const userSchema = mongoose.Schema({
   login: String,
   password: String,
   mail: String,
-  avatar: String,
+  like: [{ 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Diner" }],
+  avatar: { type: String, default: "" },
   comment: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Comment",
