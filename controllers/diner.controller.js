@@ -2,7 +2,7 @@ const Diner = require("../models/Diner.model");
 
 module.exports.diner = {
   getDiner: async (req, res) => {
-    const data = await Diner.find({});
+    const data = await Diner.find();
     res.json(data);
   },
   addDiner: async (req, res) => {

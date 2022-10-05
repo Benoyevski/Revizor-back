@@ -1,11 +1,11 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const fs = require('fs')
+const fs = require("fs");
 
 module.exports.user = {
   getUsers: async (req, res) => {
-    const user = await User.find();
+    const user = await User.find().populate('like');
     res.json(user);
   },
 
@@ -33,7 +33,9 @@ module.exports.user = {
         token,
         id: candidate._id,
       });
-    } catch (error) {res.json({error:e})}
+    } catch (error) {
+      res.json({ error: e });
+    }
   },
 
   registr: async (req, res) => {
@@ -61,11 +63,21 @@ module.exports.user = {
       const user = await User.findByIdAndUpdate(req.params.id, {
         avatar: file.name,
       });
-    
+
       if (fs.existsSync(path)) {
         return res.status(400).json("File already exist");
       }
       file.mv(path);
+      res.json(user);
+    } catch (e) {
+      res.json(e);
+    }
+  },
+  addLike: async (req, res) => {
+    try {
+      const user = await User.findByIdAndUpdate(req.body.userId, {
+        $addToSet: { like: req.body.dinerId },
+      }).populate("like");
       res.json(user);
     } catch (e) {
       res.json(e);
