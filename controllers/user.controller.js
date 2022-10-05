@@ -45,13 +45,13 @@ module.exports.user = {
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
+      console.log(hash)
       const user = await User.create({
-        comment: req.body.comment,
-        mail: req.body.mail,
+        mail,
         login: login,
         password: hash,
       });
-      res.json(user);
+      res.json(hash);
     } catch (e) {
       res.json({ error: e });
     }
