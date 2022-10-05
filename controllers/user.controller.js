@@ -5,7 +5,7 @@ const fs = require("fs");
 
 module.exports.user = {
   getUsers: async (req, res) => {
-    const user = await User.find().populate('like');
+    const user = await User.find().populate("like");
     res.json(user);
   },
 
@@ -45,7 +45,7 @@ module.exports.user = {
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
-      console.log(hash)
+      console.log(hash);
       const user = await User.create({
         mail,
         login: login,
@@ -60,14 +60,17 @@ module.exports.user = {
     try {
       const file = req.files.file;
       let path = `public\\avatar\\${file.name}`;
+
       const user = await User.findByIdAndUpdate(req.params.id, {
         avatar: file.name,
       });
 
       if (fs.existsSync(path)) {
         return res.status(400).json("File already exist");
+      }else{
+        file.mv(path);
       }
-      file.mv(path);
+
       res.json(user);
     } catch (e) {
       res.json(e);
@@ -76,7 +79,7 @@ module.exports.user = {
   addLike: async (req, res) => {
     try {
       const user = await User.findByIdAndUpdate(req.body.userId, {
-        $addToSet: { like: req.body.dinerId },
+        $addToSet: { like: req.body.dinerId }
       }).populate("like");
       res.json(user);
     } catch (e) {
