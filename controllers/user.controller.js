@@ -2,6 +2,7 @@ const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
+const Diner = require("../models/Diner.model");
 
 module.exports.user = {
   getUsers: async (req, res) => {
@@ -80,8 +81,20 @@ module.exports.user = {
     try {
       const user = await User.findByIdAndUpdate(req.body.userId, {
         $addToSet: { like: req.body.dinerId }
+      }, {new: true}).populate("like");
+      const diner = await Diner.findById(req.body.dinerId)
+      res.json(diner);
+    } catch (e) {
+      res.json(e);
+    }
+  },
+  addDislike: async (req, res) => {
+    try {
+      const user = await User.findByIdAndUpdate(req.body.userId, {
+        $pull: { like: req.body.dinerId }
       }).populate("like");
-      res.json(user);
+      const diner = await Diner.findById(req.body.dinerId)
+      res.json(diner);
     } catch (e) {
       res.json(e);
     }
