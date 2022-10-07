@@ -49,7 +49,7 @@ server.listen(3001, () => {
 app.use(require("./routes/diners.route"));
 app.use(require("./routes/comments.route"));
 app.use(require("./routes/users.route"));
-
+app.use(require("./routes/msg.route"));
 mongoose
   .connect(process.env.MONGO_SERVER)
   .then(() => console.log("mongoose connect"))
