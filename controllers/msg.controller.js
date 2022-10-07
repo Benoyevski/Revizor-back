@@ -3,7 +3,7 @@ const Msg = require("../models/Msg.model");
 module.exports.msgController = {
   getMessages: async (req, res, next) => {
     try {
-      const data = await Msg.find({})
+      const data = await Msg.find({});
       res.json(data);
     } catch (ex) {
       next(ex);

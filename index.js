@@ -41,15 +41,15 @@ io.on("connection", (socket) => {
   });
 });
 
-// server.listen(3001, () => {
-//   console.log("Чат сервер запущен");
-// });
+server.listen(3001, () => {
+  console.log("Чат сервер запущен");
+});
 
 //здесь будут роуты
 app.use(require("./routes/diners.route"));
 app.use(require("./routes/comments.route"));
 app.use(require("./routes/users.route"));
-app.use(require('./routes/msg.route'))
+app.use(require("./routes/msg.route"));
 mongoose
   .connect(process.env.MONGO_SERVER)
   .then(() => console.log("mongoose connect"))
