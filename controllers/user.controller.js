@@ -94,8 +94,7 @@ module.exports.user = {
       const user = await User.findByIdAndUpdate(req.body.userId, {
         $pull: { like: req.body.dinerId }
       }).populate("like");
-      const diner = await Diner.findById(req.body.dinerId)
-      res.json(diner);
+      res.json(user);
     } catch (e) {
       res.json(e);
     }
