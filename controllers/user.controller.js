@@ -33,7 +33,8 @@ module.exports.user = {
       res.json({
         token,
         id: candidate._id,
-        login: candidate.login
+        login: candidate.login,
+        avatar: candidate.avatar
       });
     } catch (error) {
       res.json({ error: e });
