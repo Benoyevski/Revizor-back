@@ -30,6 +30,7 @@ module.exports.diner = {
     res.json(data);
   },
   rateDiner: async (req, res) => {
+    console.log("test")
     const { dinerId, rating } = req.body;
     const { id } = req.user;
     try {
@@ -65,7 +66,6 @@ module.exports.diner = {
           rating: (sum / diner.ratedUsers.length).toFixed(1),
         });
       }
-
       return res.json(await Diner.findById(dinerId));
     } catch (e) {
       return res.json({ error: `ошибка при попытке оставить оценку: ${e}` });
