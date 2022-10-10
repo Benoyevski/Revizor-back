@@ -34,7 +34,7 @@ module.exports.user = {
         token,
         id: candidate._id,
         login: candidate.login,
-        avatar: candidate.avatar
+        avatar: candidate.avatar,
       });
     } catch (error) {
       res.json({ error: e });
@@ -70,7 +70,7 @@ module.exports.user = {
 
       if (fs.existsSync(path)) {
         return res.status(400).json("File already exist");
-      }else{
+      } else {
         file.mv(path);
       }
 
@@ -81,10 +81,14 @@ module.exports.user = {
   },
   addLike: async (req, res) => {
     try {
-      const user = await User.findByIdAndUpdate(req.body.userId, {
-        $addToSet: { like: req.body.dinerId }
-      }, {new: true}).populate("like");
-      const diner = await Diner.findById(req.body.dinerId)
+      const user = await User.findByIdAndUpdate(
+        req.body.userId,
+        {
+          $addToSet: { like: req.body.dinerId },
+        },
+        { new: true }
+      ).populate("like");
+      const diner = await Diner.findById(req.body.dinerId);
       res.json(diner);
     } catch (e) {
       res.json(e);
@@ -93,7 +97,7 @@ module.exports.user = {
   addDislike: async (req, res) => {
     try {
       const user = await User.findByIdAndUpdate(req.body.userId, {
-        $pull: { like: req.body.dinerId }
+        $pull: { like: req.body.dinerId },
       }).populate("like");
       res.json(user);
     } catch (e) {
