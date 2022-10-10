@@ -62,7 +62,7 @@ module.exports.user = {
   addAvatar: async (req, res) => {
     try {
       const file = req.files.file;
-      let path = `public\\avatar\\${file.name}`;
+      let path = `public//avatar//${file.name}`
 
       const user = await User.findByIdAndUpdate(req.params.id, {
         avatar: file.name,
