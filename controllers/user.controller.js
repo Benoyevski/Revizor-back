@@ -37,7 +37,7 @@ module.exports.user = {
         avatar: candidate.avatar
       });
     } catch (error) {
-      res.json({ error: e });
+      res.json({ error: error });
     }
   },
 
