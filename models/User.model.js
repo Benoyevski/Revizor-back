@@ -4,9 +4,12 @@ const userSchema = mongoose.Schema({
   login: String,
   password: String,
   mail: String,
-  like: [{ 
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Diner" }],
+  like: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Diner",
+    },
+  ],
   avatar: String,
   comment: {
     type: mongoose.SchemaTypes.ObjectId,
