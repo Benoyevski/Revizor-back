@@ -16,7 +16,7 @@ module.exports.user = {
       const candidate = await User.findOne({ mail, login });
 
       if (!candidate) {
-        return res.status(401).json("User not find");
+        return res.status(401).json({error: "Неверный логин или эмейл"});
       }
 
       const valid = await bcrypt.compare(password, candidate.password);
