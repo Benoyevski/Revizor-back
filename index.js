@@ -26,9 +26,9 @@ mongoose
   .then(() => console.log("mongoose connect"))
   .catch(() => console.log("warning"));
 
-app.listen(process.env.SERVER_PORT, () => {
-  console.log(`Server: ${process.env.SERVER_PORT} had been started`);
-});
+// app.listen(process.env.SERVER_PORT, () => {
+//   console.log(`Server: ${process.env.SERVER_PORT} had been started`);
+// });
 
 //chat
 const server = http.createServer(app);
@@ -57,6 +57,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("Чат сервер запущен");
+server.listen(process.env.SERVER_PORT, () => {
+  console.log(`Server: ${process.env.SERVER_PORT} had been started`);
 });
