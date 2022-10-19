@@ -11,9 +11,8 @@ app.use(fileUpload({}));
 app.use(cors());
 app.use(express.json());
 const morgan = require("morgan");
-app.use(morgan("dev"));
-import { serverUrl } from "./serverUrl";
-
+const { serverUrl } = require("./serverUrl");
+app.use(morgan("dev"))
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/public", express.static(path.resolve(__dirname, "public")));
