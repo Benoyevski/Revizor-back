@@ -11,7 +11,6 @@ app.use(fileUpload({}));
 app.use(cors());
 app.use(express.json());
 const morgan = require("morgan");
-import { serverUrl } from "./serverUrl";
 app.use(morgan("dev"));
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -36,7 +35,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: `${serverUrl}`,
+    origin: `https://revizor-front.onrender.com`,
     methods: ["GET", "POST"],
   },
 });
