@@ -58,5 +58,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(process.env.SERVER_PORT, () => {
-  console.log(`Server: ${process.env.SERVER_PORT} had been started`);
+  console.log(`Сервер запущен на порте ${process.env.SERVER_PORT}`);
 });
