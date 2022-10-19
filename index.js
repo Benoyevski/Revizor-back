@@ -7,6 +7,7 @@ const path = require("path");
 const fileUpload = require("express-fileupload");
 const http = require("http");
 const { Server } = require("socket.io");
+const port = process.env.SERVER_PORT
 app.use(fileUpload({}));
 app.use(cors());
 app.use(express.json());
@@ -57,6 +58,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.SERVER_PORT, () => {
-  console.log(`Сервер запущен на порте ${process.env.SERVER_PORT}`);
+server.listen(port, () => {
+  console.log(`Сервер запущен на порте ${port}`);
 });
