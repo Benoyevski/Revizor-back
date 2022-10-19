@@ -10,7 +10,8 @@ const { Server } = require("socket.io");
 app.use(fileUpload({}));
 app.use(cors());
 app.use(express.json());
-const morgan = require("morgan")
+const morgan = require("morgan");
+const { serverUrl } = require("./serverUrl");
 app.use(morgan("dev"))
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -35,7 +36,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: `${serverUrl}`,
     methods: ["GET", "POST"],
   },
 });
